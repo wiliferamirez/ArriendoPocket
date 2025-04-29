@@ -1,1 +1,70 @@
-﻿<h1>Register Page</h1>
+﻿@using ArriendoPocket.Areas.Identity.Pages;
+@model RegisterViewModel;
+@{
+	ViewData["Title"] = "Crear Cuenta";
+	Layout = "/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="account-container">
+	<div class="account-box">
+		<h2 class="text-center mb-4">Crear Cuenta</h2>
+		<form asp-action="Registrar" method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="mb-3">
+				<label asp-for="CedulaArrendatario" class="form-label"></label>
+				<input asp-for="CedulaArrendatario" class="form-control" />
+				<span asp-validation-for="CedulaArrendatario" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="NombreArrendatario" class="form-label"></label>
+				<input asp-for="NombreArrendatario" class="form-control" />
+				<span asp-validation-for="NombreArrendatario" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="ApellidoArrendatario" class="form-label"></label>
+				<input asp-for="ApellidoArrendatario" class="form-control" />
+				<span asp-validation-for="ApellidoArrendatario" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="CorreoArrendatario" class="form-label"></label>
+				<input asp-for="CorreoArrendatario" class="form-control" />
+				<span asp-validation-for="CorreoArrendatario" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="TelefonoArrendatario" class="form-label"></label>
+				<input asp-for="TelefonoArrendatario" class="form-control" />
+				<span asp-validation-for="TelefonoArrendatario" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="FechaNacimientoArrendatario" class="form-label"></label>
+				<input asp-for="FechaNacimientoArrendatario" type="date" class="form-control" />
+				<span asp-validation-for="FechaNacimientoArrendatario" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Contrasena" class="form-label"></label>
+				<input asp-for="Contrasena" class="form-control" />
+				<span asp-validation-for="Contrasena" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="ConfirmarContrasena" class="form-label"></label>
+				<input asp-for="ConfirmarContrasena" class="form-control" />
+				<span asp-validation-for="ConfirmarContrasena" class="text-danger"></span>
+			</div>
+
+
+			<input type="submit" value="Crear Cuenta" class="btn btn-success w-100 p-2" />
+			<p class="text-center mt-2">
+				Ya tienes una cuenta? <a asp-controller="Account" asp-action="Login" class="text-decoration-none">Inicia Sesion</a>
+			</p>
+			<div class="text-center">
+				<a asp-controller="Home" asp-action="Index" class="text-decoration-none mt-3">Regresar</a>
+			</div>
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
+	}
+}
