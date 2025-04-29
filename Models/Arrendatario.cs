@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace ArriendoPocket.Models
 {
-    public class Arrendatario
+    public class Arrendatario : IdentityUser
     {
         [Key]
         public int ArrendatarioID { get; set; }

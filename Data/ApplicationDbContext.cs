@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ArriendoPocket.Data;
 
-public class ApplicationDbContext : IdentityDbContext
+public class ApplicationDbContext : IdentityDbContext<Arrendatario>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
