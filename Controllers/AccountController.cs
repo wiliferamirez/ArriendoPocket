@@ -9,6 +9,12 @@ namespace ArriendoPocket.Controllers
     {
         private readonly SignInManager<Arrendatario> signInManager;
         private readonly UserManager<Arrendatario> userManager;
+
+        public AccountController(SignInManager<Arrendatario> signInManager, UserManager<Arrendatario> userManager)
+        {
+            this.signInManager = signInManager;
+            this.userManager = userManager;
+        }
         public IActionResult Login()
         {
             return View();
@@ -27,7 +33,9 @@ namespace ArriendoPocket.Controllers
                     CedulaArrendatario = model.CedulaArrendatario,
                     NombreArrendatario = model.NombreArrendatario,
                     ApellidoArrendatario = model.ApellidoArrendatario,
+                    UserName = model.NombreArrendatario + model.ApellidoArrendatario, 
                     CorreoArrendatario = model.CorreoArrendatario,
+                    Email = model.CorreoArrendatario,
                     TelefonoArrendatario = model.TelefonoArrendatario,
                     FechaNacimientoArrendatario = model.FechaNacimientoArrendatario
                 };
