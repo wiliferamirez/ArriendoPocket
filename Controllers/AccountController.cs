@@ -19,6 +19,24 @@ namespace ArriendoPocket.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await signInManager.PasswordSignInAsync(model.Correo, model.Contrasena, model.RememberMe, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Correo o contrasena incorrecta");
+                    return View(model);
+                }
+            }
+            return View(model);
+        }
         public IActionResult Register()
         {
             return View();
