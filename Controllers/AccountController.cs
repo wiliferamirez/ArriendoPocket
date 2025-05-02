@@ -24,19 +24,24 @@ namespace ArriendoPocket.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(model.Correo, model.Contrasena, model.RememberMe, false);
-                if (result.Succeeded)
+                var user = await userManager.FindByEmailAsync(model.Correo);
+                if (user != null)
                 {
-                    return RedirectToAction("Index", "Home");
+                    var result = await signInManager.PasswordSignInAsync(
+                        user.UserName, model.Contrasena, model.RememberMe, false);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Correo o contrasena incorrecta");
-                    return View(model);
-                }
+
+                ModelState.AddModelError("", "Correo o contraseña incorrecta");
             }
+
             return View(model);
         }
+
         public IActionResult Register()
         {
             return View();
