@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ArriendoPocket.Data;
 using ArriendoPocket.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ArriendoPocket.Controllers
 {
@@ -20,6 +21,7 @@ namespace ArriendoPocket.Controllers
         }
 
         // GET: Propiedades
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Propiedades.Include(p => p.Propietario);
