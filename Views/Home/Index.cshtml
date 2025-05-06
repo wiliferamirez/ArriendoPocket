@@ -1,8 +1,31 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Arriendo Pocket | Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container text-center mb-5">
+    <h2 class="mb-4">¿Por qué elegir ArriendoPocket?</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="https://cdn-icons-png.flaticon.com/512/4456/4456908.png" width="150 px" class="index-image rounded-circle mb-3" alt="Fácil de usar">
+            <h5>Fácil de Usar</h5>
+            <p>Publica o encuentra propiedades con unos pocos clics. Interfaz sencilla y moderna.</p>
+        </div>
+        <div class="col-md-4">
+            <img src="https://img.lovepik.com/photo/50073/3957.jpg_wh860.jpg" width="150 px" class="index-image rounded-circle mb-3" alt="Pensado para estudiantes">
+            <h5>Pensado para Estudiantes</h5>
+            <p>Conecta con otros jóvenes en busca de vivienda, libros o ayuda académica.</p>
+        </div>
+        <div class="col-md-4">
+            <img src="https://th.bing.com/th/id/R.e088518de655bf394c0324806df93366?rik=gh2ccNjQeG5o4A&pid=ImgRaw&r=0" width="150 px" class="index-image rounded-circle mb-3" alt="Ubicación ideal">
+            <h5>Ubicaciones Estratégicas</h5>
+            <p>Propiedades en zonas universitarias, seguras y cercanas al transporte público.</p>
+        </div>
+    </div>
 </div>
+
+<div class="bg-primary text-white text-center py-5">
+    <h3 class="mb-3">¿Eres nuevo aquí?</h3>
+    <p class="mb-4">Crea una cuenta y empieza a explorar oportunidades hoy mismo.</p>
+    <a class="btn btn-light btn-lg" asp-area="Identity" asp-page="/Account/Register">Registrarse Ahora</a>
+</div>
+
