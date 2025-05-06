@@ -1,0 +1,107 @@
+﻿@model IEnumerable<ArriendoPocket.Models.Propiedad>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Propietario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreInquilino)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AliasPropiedad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DireccionPropiedad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroHabitaciones)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CanonArrendatario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Disponible)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MesesGarantia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroPisos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AreaConstruccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CiudadUbicacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaConstruccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaCreacion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Propietario.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreInquilino)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AliasPropiedad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DireccionPropiedad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroHabitaciones)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CanonArrendatario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disponible)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MesesGarantia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroPisos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AreaConstruccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CiudadUbicacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaConstruccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaCreacion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PropiedadID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PropiedadID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PropiedadID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

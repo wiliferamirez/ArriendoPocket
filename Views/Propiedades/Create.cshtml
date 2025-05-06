@@ -1,0 +1,92 @@
+﻿@model ArriendoPocket.Models.Propiedad
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Propiedad</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ArrendatarioID" class="control-label"></label>
+                <select asp-for="ArrendatarioID" class ="form-control" asp-items="ViewBag.ArrendatarioID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreInquilino" class="control-label"></label>
+                <input asp-for="NombreInquilino" class="form-control" />
+                <span asp-validation-for="NombreInquilino" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AliasPropiedad" class="control-label"></label>
+                <input asp-for="AliasPropiedad" class="form-control" />
+                <span asp-validation-for="AliasPropiedad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DireccionPropiedad" class="control-label"></label>
+                <input asp-for="DireccionPropiedad" class="form-control" />
+                <span asp-validation-for="DireccionPropiedad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroHabitaciones" class="control-label"></label>
+                <input asp-for="NumeroHabitaciones" class="form-control" />
+                <span asp-validation-for="NumeroHabitaciones" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CanonArrendatario" class="control-label"></label>
+                <input asp-for="CanonArrendatario" class="form-control" />
+                <span asp-validation-for="CanonArrendatario" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Disponible" /> @Html.DisplayNameFor(model => model.Disponible)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="MesesGarantia" class="control-label"></label>
+                <input asp-for="MesesGarantia" class="form-control" />
+                <span asp-validation-for="MesesGarantia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroPisos" class="control-label"></label>
+                <input asp-for="NumeroPisos" class="form-control" />
+                <span asp-validation-for="NumeroPisos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AreaConstruccion" class="control-label"></label>
+                <input asp-for="AreaConstruccion" class="form-control" />
+                <span asp-validation-for="AreaConstruccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CiudadUbicacion" class="control-label"></label>
+                <input asp-for="CiudadUbicacion" class="form-control" />
+                <span asp-validation-for="CiudadUbicacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaConstruccion" class="control-label"></label>
+                <input asp-for="FechaConstruccion" class="form-control" />
+                <span asp-validation-for="FechaConstruccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaCreacion" class="control-label"></label>
+                <input asp-for="FechaCreacion" class="form-control" />
+                <span asp-validation-for="FechaCreacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

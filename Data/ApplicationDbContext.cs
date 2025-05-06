@@ -11,5 +11,6 @@ public class ApplicationDbContext : IdentityDbContext<Arrendatario>
     {
     }
     public DbSet<Arrendatario> Arrendatarios { get; set; }
+    public DbSet<Propiedad> Propiedades { get; set; }
 
 }

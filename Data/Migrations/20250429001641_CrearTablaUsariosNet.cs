@@ -11,65 +11,7 @@ namespace ArriendoPocket.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Arrendatarios");
 
-            migrationBuilder.AddColumn<string>(
-                name: "ApellidoArrendatario",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<int>(
-                name: "ArrendatarioID",
-                table: "AspNetUsers",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<string>(
-                name: "CedulaArrendatario",
-                table: "AspNetUsers",
-                type: "nvarchar(10)",
-                maxLength: 10,
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<string>(
-                name: "CorreoArrendatario",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<DateOnly>(
-                name: "FechaNacimientoArrendatario",
-                table: "AspNetUsers",
-                type: "date",
-                nullable: false,
-                defaultValue: new DateOnly(1, 1, 1));
-
-            migrationBuilder.AddColumn<DateTime>(
-                name: "FechaRegistroArrendatario",
-                table: "AspNetUsers",
-                type: "datetime2",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
-
-            migrationBuilder.AddColumn<string>(
-                name: "NombreArrendatario",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<string>(
-                name: "TelefonoArrendatario",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
         }
 
         /// <inheritdoc />
