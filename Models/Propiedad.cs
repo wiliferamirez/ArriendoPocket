@@ -53,7 +53,7 @@ namespace ArriendoPocket.Models
 
         [Required(ErrorMessage = "Campo Obligatorio")]
         [DisplayName("Ano de Construccion")]
-        public DateOnly FechaConstruccion { get; set; }
+        public int FechaConstruccion { get; set; }
 
         [DisplayName("Fecha de inscripcion de Propiedad")]
         public DateTime FechaCreacion { get; set; } = DateTime.Now;

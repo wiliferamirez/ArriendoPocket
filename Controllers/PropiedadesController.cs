@@ -1,23 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ArriendoPocket.Data;
+using ArriendoPocket.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ArriendoPocket.Data;
-using ArriendoPocket.Models;
-using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ArriendoPocket.Controllers
 {
     public class PropiedadesController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public PropiedadesController(ApplicationDbContext context)
+        private readonly UserManager<Arrendatario> _userManager;
+        public PropiedadesController(ApplicationDbContext context, UserManager<Arrendatario> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Propiedades
@@ -54,22 +57,61 @@ namespace ArriendoPocket.Controllers
             return View();
         }
 
-        // POST: Propiedades/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PropiedadID,ArrendatarioID,NombreInquilino,AliasPropiedad,DireccionPropiedad,NumeroHabitaciones,CanonArrendatario,Disponible,MesesGarantia,NumeroPisos,AreaConstruccion,CiudadUbicacion,FechaConstruccion,FechaCreacion")] Propiedad propiedad)
+        public async Task<IActionResult> Create(Propiedad propiedad)
         {
+            // 1. Obtener el ID del usuario autenticado
+            var userId = _userManager.GetUserId(User);
+            propiedad.ArrendatarioID = userId;
+
+            // 2. Limpiar campos que no se envían desde el formulario, pero son necesarios para insertar
+            ModelState.Remove(nameof(propiedad.ArrendatarioID));
+            ModelState.Remove(nameof(propiedad.Propietario));
+
+            // 3. Debug: imprimir datos recibidos
+            Console.WriteLine("[DEBUG] Usuario autenticado ID: " + userId);
+            Console.WriteLine("[DEBUG] Propiedad recibida:");
+            Console.WriteLine("Nombre Inquilino: " + propiedad.NombreInquilino);
+            Console.WriteLine("Alias Propiedad: " + propiedad.AliasPropiedad);
+            Console.WriteLine("Canon: " + propiedad.CanonArrendatario);
+            Console.WriteLine("ArrendatarioID (desde sesión): " + propiedad.ArrendatarioID);
+
+            // 4. Validar modelo y guardar si es correcto
             if (ModelState.IsValid)
             {
-                _context.Add(propiedad);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(propiedad);
+                    await _context.SaveChangesAsync();
+                    Console.WriteLine("[DEBUG] Propiedad creada exitosamente.");
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("[ERROR] Error al guardar propiedad: " + ex.Message);
+                    ModelState.AddModelError("", "Ocurrió un error al guardar la propiedad.");
+                }
             }
+            else
+            {
+                Console.WriteLine("[ERROR] ModelState inválido:");
+                foreach (var kvp in ModelState)
+                {
+                    foreach (var err in kvp.Value.Errors)
+                    {
+                        Console.WriteLine($"[ERROR] Campo: {kvp.Key}, Error: {err.ErrorMessage}");
+                    }
+                }
+            }
+
+            // 5. Recargar dropdown por si se vuelve a mostrar la vista
             ViewData["ArrendatarioID"] = new SelectList(_context.Arrendatarios, "Id", "Id", propiedad.ArrendatarioID);
             return View(propiedad);
         }
+
+
+
 
         // GET: Propiedades/Edit/5
         public async Task<IActionResult> Edit(int? id)

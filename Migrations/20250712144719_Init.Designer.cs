@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ArriendoPocket.Data.Migrations
+namespace ArriendoPocket.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250429001641_CrearTablaUsariosNet")]
-    partial class CrearTablaUsariosNet
+    [Migration("20250712144719_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,6 +118,65 @@ namespace ArriendoPocket.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("ArriendoPocket.Models.Propiedad", b =>
+                {
+                    b.Property<int>("PropiedadID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropiedadID"));
+
+                    b.Property<string>("AliasPropiedad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("AreaConstruccion")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ArrendatarioID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("CanonArrendatario")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("CiudadUbicacion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DireccionPropiedad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Disponible")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("FechaConstruccion")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MesesGarantia")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreInquilino")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumeroHabitaciones")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumeroPisos")
+                        .HasColumnType("int");
+
+                    b.HasKey("PropiedadID");
+
+                    b.HasIndex("ArrendatarioID");
+
+                    b.ToTable("Propiedades");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -251,6 +310,17 @@ namespace ArriendoPocket.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("ArriendoPocket.Models.Propiedad", b =>
+                {
+                    b.HasOne("ArriendoPocket.Models.Arrendatario", "Propietario")
+                        .WithMany()
+                        .HasForeignKey("ArrendatarioID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Propietario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
